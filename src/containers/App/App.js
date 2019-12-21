@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getElonMuskDreams } from '../../apiCalls';
+import LaunchContainer from '../LaunchContainer/LaunchContainer';
 import { addSpaceData } from '../../actions';
 import { connect } from 'react-redux';
 import './App.css';
@@ -14,17 +15,14 @@ class App extends Component {
     return (
       <div>
         <h1>SpaceX</h1>
+        <LaunchContainer />
       </div>
     );
   };
 }
 
-const mapStateToProps = state => ({
-  spaceData: state.spaceData
-});
-
 const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
