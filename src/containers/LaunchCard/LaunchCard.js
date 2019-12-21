@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './LaunchCard.css';
 
 export const LaunchCard = ({ launch }) => {
   return (
-    <div>
-      <h1>{launch.flight_number}</h1>
+    <div className='launch-card'>
+      <p>Flight Number: {launch.flight_number}</p>
+      <p>Mission: {launch.mission_name}</p>
+      <p>Launched: {launch.launch_year}</p>
+      <p>Site: {launch.launch_site.site_name_long}</p>
     </div>
   );
 };
 
-export default LaunchCard;
+export default connect(null, null)(LaunchCard);
