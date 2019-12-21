@@ -15,14 +15,18 @@ class App extends Component {
     return (
       <div>
         <h1>SpaceX</h1>
-        <LaunchContainer />
+        <LaunchContainer launches={this.props.launches} />
       </div>
     );
   };
 }
 
+const mapStateToProps = state => ({
+  launches: state.spaceData
+});
+
 const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
