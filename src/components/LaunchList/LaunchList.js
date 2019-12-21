@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export const LaunchContainer = () => {
+export const LaunchList = () => {
   return (
     <div>
       <h1>LaunchContainer</h1>
@@ -9,4 +9,4 @@ export const LaunchContainer = () => {
   );
 };
 
-export default connect(null, null)(LaunchContainer);
+export default connect(null, null)(LaunchList);
