@@ -7,8 +7,9 @@ export const LaunchCard = ({ launch }) => {
     <div className='launch-card'>
       <p>Flight Number: {launch.flight_number}</p>
       <p>Mission: {launch.mission_name}</p>
-      <p>Launched: {launch.launch_year}</p>
+      <p>Launch: {launch.launch_year}</p>
       <p>Site: {launch.launch_site.site_name_long}</p>
+      <button className='save-button'>SAVE</button>
     </div>
   );
 };
