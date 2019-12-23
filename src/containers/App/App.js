@@ -27,7 +27,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addSpaceData: spaceData => dispatch(addSpaceData(spaceData))
+  addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
+  saveFavorites: favorites => dispatch(saveFavorites(favorites))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
