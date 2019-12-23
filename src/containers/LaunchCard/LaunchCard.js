@@ -14,4 +14,8 @@ export const LaunchCard = ({ launch }) => {
   );
 };
 
-export default connect(null, null)(LaunchCard);
+export const mapStateToProps = state => ({
+  favorites: state.favorites
+});
+
+export default connect(mapStateToProps, null)(LaunchCard);
