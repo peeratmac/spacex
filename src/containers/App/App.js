@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getElonMuskDreams } from '../../apiCalls';
-import LaunchContainer from '../../components/LaunchList/LaunchList';
-import { addSpaceData } from '../../actions';
+import LaunchList from '../../components/LaunchList/LaunchList';
+import { addSpaceData, saveFavorites } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
@@ -12,22 +12,31 @@ class App extends Component {
     getElonMuskDreams().then(data => addSpaceData(data));
   }
 
+  saveFavorite = launch => {
+    this.props.saveFavorites(launch);
+  };
+
   render = () => {
     return (
       <div>
         <h1>SpaceX</h1>
-        <LaunchContainer launches={this.props.launches} />
+        <LaunchList
+          launches={this.props.launches}
+          saveFavorite={this.saveFavorite}
+        />
       </div>
     );
   };
 }
 
 const mapStateToProps = state => ({
-  launches: state.spaceData
+  launches: state.spaceData,
+  favorites: state.favorties
 });
 
 const mapDispatchToProps = dispatch => ({
-  addSpaceData: spaceData => dispatch(addSpaceData(spaceData))
+  addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
+  saveFavorites: favorites => dispatch(saveFavorites(favorites))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
