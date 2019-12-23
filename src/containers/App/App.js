@@ -12,8 +12,8 @@ class App extends Component {
     getElonMuskDreams().then(data => addSpaceData(data));
   }
 
-  saveFavorite = favorites => {
-    this.props.saveFavorites(favorites);
+  saveFavorite = launch => {
+    this.props.saveFavorites(launch);
   };
 
   render = () => {
