@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import './LaunchList.css';
 
 export const LaunchList = ({ launches }) => {
-  const launchesData = launches.map(launch => {
-    return <LaunchCard launch={launch} />;
+  const launchesData = launches.map((launch, index) => {
+    return <LaunchCard launch={launch} key={index} />;
   });
   return <div className='grid-3'>{launchesData}</div>;
 };
