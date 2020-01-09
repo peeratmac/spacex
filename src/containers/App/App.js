@@ -34,7 +34,12 @@ class App extends Component {
         <Route
           exact
           path='/favorites'
-          render={() => <Favorites favoriteLaunches={this.props.favorites} />}
+          render={() => (
+            <Favorites
+              favoriteLaunches={this.props.favorites}
+              saveFavorite={this.saveFavorite}
+            />
+          )}
         />
       </div>
     );
