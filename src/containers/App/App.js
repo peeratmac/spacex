@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getElonMuskDreams } from '../../apiCalls';
 import LaunchList from '../../components/LaunchList/LaunchList';
+import { Favorites } from '../../containers/Favorites/Favorites';
 import { addSpaceData, saveFavorites } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -20,9 +21,20 @@ class App extends Component {
     return (
       <div>
         <h1>SpaceX</h1>
-        <LaunchList
-          launches={this.props.launches}
-          saveFavorite={this.saveFavorite}
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <LaunchList
+              launches={this.props.launches}
+              saveFavorite={this.saveFavorite}
+            />
+          )}
+        />
+        <Route
+          exact
+          path='/favorites'
+          render={() => <Favorites favoriteLaunches={this.props.favorites} />}
         />
       </div>
     );
