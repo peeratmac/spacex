@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getElonMuskDreams } from '../../apiCalls';
 import LaunchList from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
+import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { addSpaceData, saveFavorites } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,6 +22,7 @@ class App extends Component {
     return (
       <div>
         <h1>SpaceX</h1>
+        <Route path='/' render={() => <NavigationBar />} />
         <Route
           exact
           path='/'
