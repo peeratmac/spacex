@@ -10,9 +10,15 @@ import { connect } from 'react-redux';
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { addSpaceData } = this.props;
-    getElonMuskDreams().then(data => addSpaceData(data));
+    try {
+      const data = await getElonMuskDreams();
+      addSpaceData(data);
+    } catch (error) {
+      console.log(error);
+    }
+    // getElonMuskDreams().then(data => addSpaceData(data));
   }
 
   saveFavorite = launch => {
