@@ -19,15 +19,14 @@ class App extends Component {
 
     const flights = favorites.map(favorite => favorite.flight_number);
 
-    // if (flights.includes(launch.flight_number)) {
-    //   console.log('yep');
-    //   const filteredFlights = favorites.filter(
-    //     favorite => favorite.flight_number !== launch.flight_number
-    //   );
-    //   saveFavorites(filteredFlights);
-    // }
-
-    saveFavorites(launch);
+    if (flights.includes(launch.flight_number)) {
+      const filteredFlights = favorites.filter(
+        favorite => favorite.flight_number !== launch.flight_number
+      );
+      console.log(filteredFlights);
+    } else {
+      saveFavorites(launch);
+    }
   };
 
   render = () => {
