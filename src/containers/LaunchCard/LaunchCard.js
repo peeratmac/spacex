@@ -4,17 +4,21 @@ import './LaunchCard.css';
 
 export const LaunchCard = ({ launch, saveFavorite }) => {
   return (
-    <div
-      onClick={() => console.log(`hi, ${launch.rocket.rocket_id}`)}
-      className='launch-card'>
-      <p>Flight Number: {launch.flight_number}</p>
-      <p>Mission: {launch.mission_name}</p>
-      <p>Launch: {launch.launch_year}</p>
-      <p>Site: {launch.launch_site.site_name_long}</p>
-      <button onClick={() => saveFavorite(launch)} className='save-button'>
-        SAVE
-      </button>
-    </div>
+    <NavLink
+      to={`/launch/${launch.flight_number}`}
+      style={{ textDecoration: 'none' }}>
+      <div
+        onClick={() => console.log(`hi, ${launch.links.mission_patch}`)}
+        className='launch-card'>
+        <p>Flight Number: {launch.flight_number}</p>
+        <p>Mission: {launch.mission_name}</p>
+        <p>Launch: {launch.launch_year}</p>
+        <p>Site: {launch.launch_site.site_name_long}</p>
+        <button onClick={() => saveFavorite(launch)} className='save-button'>
+          SAVE
+        </button>
+      </div>
+    </NavLink>
   );
 };
 
