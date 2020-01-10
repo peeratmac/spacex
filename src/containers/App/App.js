@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getElonMuskDreams } from '../../apiCalls';
-import LaunchList from '../../components/LaunchList/LaunchList';
+import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { addSpaceData, saveFavorites } from '../../actions';
@@ -15,10 +15,12 @@ class App extends Component {
   }
 
   saveFavorite = launch => {
-    this.props.saveFavorites(launch);
+    const { saveFavorites } = this.props;
+    saveFavorites(launch);
   };
 
   render = () => {
+    console.log(this.props.favorites);
     return (
       <div>
         <h1>SpaceX</h1>
@@ -50,7 +52,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   launches: state.spaceData,
-  favorites: state.favorties
+  favorites: state.favorites
 });
 
 const mapDispatchToProps = dispatch => ({

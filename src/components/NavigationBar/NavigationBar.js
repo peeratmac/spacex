@@ -8,6 +8,9 @@ export const NavigationBar = () => {
       <NavLink exact to='/'>
         Home
       </NavLink>
+      <NavLink exact to='/favorites'>
+        Favorites
+      </NavLink>
     </div>
   );
 };
