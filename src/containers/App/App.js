@@ -18,7 +18,6 @@ class App extends Component {
     } catch (error) {
       console.log(error);
     }
-    // getElonMuskDreams().then(data => addSpaceData(data));
   }
 
   saveFavorite = launch => {

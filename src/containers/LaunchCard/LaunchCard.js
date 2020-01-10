@@ -1,9 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './LaunchCard.css';
 
 export const LaunchCard = ({ launch, saveFavorite }) => {
   return (
-    <div className='launch-card'>
+    <div
+      onClick={() => console.log(`hi, ${launch.rocket.rocket_id}`)}
+      className='launch-card'>
       <p>Flight Number: {launch.flight_number}</p>
       <p>Mission: {launch.mission_name}</p>
       <p>Launch: {launch.launch_year}</p>
