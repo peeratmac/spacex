@@ -5,6 +5,7 @@ import './LaunchCard.css';
 export const LaunchCard = ({ launch, saveFavorite }) => {
   return (
     <NavLink
+      className='launch-card-main'
       to={`/launch/${launch.flight_number}`}
       style={{ textDecoration: 'none' }}>
       <div
@@ -13,7 +14,7 @@ export const LaunchCard = ({ launch, saveFavorite }) => {
         <p>Flight Number: {launch.flight_number}</p>
         <p>Mission: {launch.mission_name}</p>
         <p>Launch: {launch.launch_year}</p>
-        <p>Site: {launch.launch_site.site_name_long}</p>
+        <p className='site-name'>Site: {launch.launch_site.site_name_long}</p>
         <button onClick={() => saveFavorite(launch)} className='save-button'>
           SAVE
         </button>
