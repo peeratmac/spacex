@@ -36,7 +36,6 @@ class App extends Component {
     console.log(this.props.favorites);
     return (
       <div>
-        <h1>SpaceX</h1>
         <Route path='/' render={() => <NavigationBar />} />
         <Route
           exact
