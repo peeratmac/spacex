@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { getElonMuskDreams } from '../../apiCalls';
-import LaunchList from '../../components/LaunchList/LaunchList';
+import { LaunchList } from '../../components/LaunchList/LaunchList';
+import { Favorites } from '../../containers/Favorites/Favorites';
+import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { addSpaceData, saveFavorites } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -13,16 +15,35 @@ class App extends Component {
   }
 
   saveFavorite = launch => {
-    this.props.saveFavorites(launch);
+    const { saveFavorites } = this.props;
+    saveFavorites(launch);
   };
 
   render = () => {
+    console.log(this.props.favorites);
     return (
       <div>
         <h1>SpaceX</h1>
-        <LaunchList
-          launches={this.props.launches}
-          saveFavorite={this.saveFavorite}
+        <Route path='/' render={() => <NavigationBar />} />
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <LaunchList
+              launches={this.props.launches}
+              saveFavorite={this.saveFavorite}
+            />
+          )}
+        />
+        <Route
+          exact
+          path='/favorites'
+          render={() => (
+            <Favorites
+              favoriteLaunches={this.props.favorites}
+              saveFavorite={this.saveFavorite}
+            />
+          )}
         />
       </div>
     );
@@ -31,7 +52,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   launches: state.spaceData,
-  favorites: state.favorties
+  favorites: state.favorites
 });
 
 const mapDispatchToProps = dispatch => ({

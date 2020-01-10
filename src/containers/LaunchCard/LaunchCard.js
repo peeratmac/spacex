@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './LaunchCard.css';
 
 export const LaunchCard = ({ launch, saveFavorite }) => {
@@ -16,8 +15,4 @@ export const LaunchCard = ({ launch, saveFavorite }) => {
   );
 };
 
-export const mapStateToProps = state => ({
-  favorites: state.favorites
-});
-
-export default connect(mapStateToProps, null)(LaunchCard);
+export default LaunchCard;
