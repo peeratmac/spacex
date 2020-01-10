@@ -4,6 +4,14 @@
   margin: 0.7rem 0;
 }
 
+.launch-card-main {
+  color: black;
+}
+
+.site-name {
+  min-height: 50px;
+}
+
 .save-button {
   display: inline-block;
   background: lightblue;
