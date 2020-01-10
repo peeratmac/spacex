@@ -4,23 +4,25 @@ import './NavigationBar.css';
 
 export const NavigationBar = () => {
   return (
-    <div>
-      <h1>Space X</h1>
-      <NavLink exact to='/'>
-        Home
-      </NavLink>
-      <NavLink exact to='/favorites'>
-        Favorites
-      </NavLink>
-      <NavLink exact to='/upcoming-launches'>
-        Upcoming Launches
-      </NavLink>
-      <NavLink exact to='/spacex-history'>
-        Space X History
-      </NavLink>
-      <NavLink exact to='/launch-pads'>
-        Launch Pads
-      </NavLink>
+    <div className='nav-header'>
+      <div className='logo'>Space X</div>
+      <div className='main-nav'>
+        <NavLink className='nav-link-title' exact to='/'>
+          Home
+        </NavLink>
+        <NavLink className='nav-link-title' exact to='/favorites'>
+          Favorites
+        </NavLink>
+        <NavLink className='nav-link-title' exact to='/upcoming-launches'>
+          Upcoming Launches
+        </NavLink>
+        <NavLink className='nav-link-title' exact to='/spacex-history'>
+          Space X History
+        </NavLink>
+        <NavLink className='nav-link-title' exact to='/launch-pads'>
+          Launch Pads
+        </NavLink>
+      </div>
     </div>
   );
 };

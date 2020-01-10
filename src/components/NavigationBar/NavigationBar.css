@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+.nav-link-title {
+  color: #34495e;
+  padding: 10px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.logo {
+  margin-left: 30px;
+  font-size: 1.45em;
+}
+
+.main-nav {
+  margin-top: 5px;
+}
+
+.nav-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 4.5em;
+  padding-bottom: 0.5em;
+  border: 1px solid #a2a2a2;
+  background-color: #f4f4f4;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+}
