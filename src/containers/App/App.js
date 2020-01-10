@@ -15,7 +15,18 @@ class App extends Component {
   }
 
   saveFavorite = launch => {
-    const { saveFavorites } = this.props;
+    const { saveFavorites, favorites } = this.props;
+
+    const flights = favorites.map(favorite => favorite.flight_number);
+
+    // if (flights.includes(launch.flight_number)) {
+    //   console.log('yep');
+    //   const filteredFlights = favorites.filter(
+    //     favorite => favorite.flight_number !== launch.flight_number
+    //   );
+    //   saveFavorites(filteredFlights);
+    // }
+
     saveFavorites(launch);
   };
 
