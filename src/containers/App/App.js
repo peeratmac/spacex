@@ -3,6 +3,7 @@ import { getElonMuskDreams } from '../../apiCalls';
 import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
+import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
 import { addSpaceData, saveFavorites, clearFavorites } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -36,7 +37,6 @@ class App extends Component {
     console.log(this.props.favorites);
     return (
       <div>
-        <h1>SpaceX</h1>
         <Route path='/' render={() => <NavigationBar />} />
         <Route
           exact
@@ -47,6 +47,17 @@ class App extends Component {
               saveFavorite={this.saveFavorite}
             />
           )}
+        />
+        <Route
+          exact
+          path='/launch/:flight_number'
+          render={({ match }) => {
+            const launchData = this.props.launches.find(
+              launch =>
+                launch.flight_number === parseInt(match.params.flight_number)
+            );
+            return <LaunchPage {...launchData} />;
+          }}
         />
         <Route
           exact
