@@ -3,7 +3,7 @@ import { getElonMuskDreams } from '../../apiCalls';
 import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
-import { addSpaceData, saveFavorites } from '../../actions';
+import { addSpaceData, saveFavorites, clearFavorites } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
@@ -15,8 +15,21 @@ class App extends Component {
   }
 
   saveFavorite = launch => {
-    const { saveFavorites } = this.props;
-    saveFavorites(launch);
+    const { saveFavorites, favorites } = this.props;
+
+    const flights = favorites.map(favorite => favorite.flight_number);
+
+    console.log(flights);
+
+    if (flights.includes(launch.flight_number)) {
+      let filteredFlights = favorites.filter(
+        favorite => favorite.flight_number !== launch.flight_number
+      );
+      console.log(filteredFlights);
+      // saveFavorites(filteredFlights);
+    } else {
+      saveFavorites(launch);
+    }
   };
 
   render = () => {
