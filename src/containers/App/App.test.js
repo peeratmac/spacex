@@ -1,9 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { shallow } from 'enzyme';
+import { App } from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('APP', () => {
+  it('should match the App Snapshot UI', () => {
+    let wrapper = shallow(<App />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
 });

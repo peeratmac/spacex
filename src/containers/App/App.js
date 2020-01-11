@@ -9,7 +9,7 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   async componentDidMount() {
     const { addSpaceData } = this.props;
     try {
@@ -32,7 +32,6 @@ class App extends Component {
         favorite => favorite.flight_number !== launch.flight_number
       );
       console.log(filteredFlights);
-      // saveFavorites(filteredFlights);
     } else {
       saveFavorites(launch);
     }
