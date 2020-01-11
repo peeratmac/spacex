@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import './LaunchCard.css';
 
 export const LaunchCard = ({ launch, saveFavorite }) => {
-  console.log(launch);
   return (
     <div className='launch-card-main'>
       <NavLink

@@ -56,11 +56,12 @@ export class App extends Component {
           exact
           path='/launch/:flight_number'
           render={({ match }) => {
-            const launchData = this.props.launches.find(
-              launch =>
-                launch.flight_number === parseInt(match.params.flight_number)
+            const { flight_number } = match.params;
+            const allLaunches = [...this.props.launches];
+            const launchData = allLaunches.find(
+              launch => launch.flight_number === parseInt(flight_number)
             );
-            return <LaunchPage {...launchData} />;
+            return <LaunchPage launch={launchData} />;
           }}
         />
         <Route

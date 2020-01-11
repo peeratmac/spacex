@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { LaunchPage } from './LaunchPage';
 
 describe('LAUNCH PAGE', () => {
-  it.skip('should match the LaunchPage Snapshot UI', () => {
+  it('should match the LaunchPage Snapshot UI', () => {
     const mockLaunch = {
       flight_number: 1,
       mission_name: 'FalconSat',
@@ -117,8 +117,9 @@ describe('LAUNCH PAGE', () => {
       },
       crew: null
     };
+
     console.log(mockLaunch.links.mission_patch);
-    const wrapper = shallow(<LaunchPage launch={mockLaunch} />);
+    let wrapper = shallow(<LaunchPage launch={mockLaunch} />);
 
     expect(wrapper).toMatchSnapshot();
   });
