@@ -1,10 +1,11 @@
-.launch-card {
+.launch-card-main {
   padding: 1rem;
-  border: #ccc 1px dotted;
   margin: 0.7rem 0;
+  border: 5px solid lightblue;
+  border-radius: 25px;
 }
 
-.launch-card-main {
+.launch-card {
   color: black;
 }
 

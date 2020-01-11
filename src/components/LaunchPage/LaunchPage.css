@@ -1,0 +1,12 @@
+.launch-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.patch-image {
+  padding-top: 50px;
+  height: 450px;
+  margin: auto;
+  display: block;
+}
