@@ -7,3 +7,8 @@ export const saveFavorites = favorites => ({
   type: 'SAVE_FAVORITES',
   favorites: favorites
 });
+
+export const handleError = errorMessage => ({
+  type: 'HANDLE_ERROR',
+  errorMessage: errorMessage
+});
