@@ -256,5 +256,16 @@ describe('API CALLS', () => {
     it('should return an array of all the launches by SpaceX', () => {
       expect(getElonMuskDreams()).resolves.toEqual(mockResponse);
     });
+
+    it('should return an error for a response that is not ok from fetching the launches', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        });
+      });
+      expect(getElonMuskDreams()).rejects.toEqual(
+        Error('Error with GET request to retreive all Launches Data')
+      );
+    });
   });
 });
