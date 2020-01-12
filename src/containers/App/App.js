@@ -92,7 +92,12 @@ export class App extends Component {
         <Route
           exact
           path='/upcoming-launches'
-          render={() => <UpcomingLaunches />}
+          render={() => (
+            <UpcomingLaunches
+              upcomingLaunches={this.props.upcomingLaunches}
+              saveFavorite={this.saveFavorite}
+            />
+          )}
         />
       </div>
     );

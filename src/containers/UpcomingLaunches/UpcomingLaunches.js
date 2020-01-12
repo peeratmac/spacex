@@ -3,13 +3,18 @@ import { getFutureElonMuskDreams } from '../../apiCalls';
 import LaunchCard from '../../containers/LaunchCard/LaunchCard';
 import { connect } from 'react-redux';
 import './UpcomingLaunches.css';
-import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { addUpcomingSpaceData } from '../../actions';
 
-export const UpcomingLaunches = () => {
+export const UpcomingLaunches = ({ upcomingLaunches, saveFavorite }) => {
+  const launchesData = upcomingLaunches.map((launch, index) => {
+    return (
+      <LaunchCard launch={launch} saveFavorite={saveFavorite} key={index} />
+    );
+  });
+
   return (
     <div>
-      <h1>Test</h1>
+      <div className='grid-3'>{launchesData}</div>
     </div>
   );
 };
