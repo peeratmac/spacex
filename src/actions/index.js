@@ -17,3 +17,8 @@ export const isLoading = loadingStatus => ({
   type: 'IS_LOADING',
   isLoading: loadingStatus
 });
+
+export const addUpcomingSpaceData = upcomingSpaceData => ({
+  type: 'ADD_UPCOMING_SPACE_DATA',
+  upcomingSpaceData: upcomingSpaceData
+});
