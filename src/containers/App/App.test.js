@@ -127,7 +127,7 @@ describe('APP', () => {
   const mockAddSpaceData = jest.fn();
   const mockSaveFavorties = jest.fn();
 
-  // getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
+  getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
 
   beforeEach(() => {
     wrapper = shallow(
@@ -145,7 +145,10 @@ describe('APP', () => {
   });
 
   it('should invoke getElonMuskDreams after mounting', () => {
-    getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
     expect(getElonMuskDreams).toHaveBeenCalled();
+  });
+
+  it('should invoke addSpaceData prop when getElonMuskDreams resolves', () => {
+    expect(mockAddSpaceData).toHaveBeenCalledWith(mockLaunchData);
   });
 });
