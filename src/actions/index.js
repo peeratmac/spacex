@@ -7,8 +7,3 @@ export const saveFavorites = favorites => ({
   type: 'SAVE_FAVORITES',
   favorites: favorites
 });
-
-export const clearFavorites = () => ({
-  type: 'CLEAR_FAVORITES',
-  favorites: []
-});
