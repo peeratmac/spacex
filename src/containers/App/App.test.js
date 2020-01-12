@@ -1,7 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { App, mapStateToProps, mapDispatchToProps } from './App';
-import { getElonMuskDreams } from '../../apiCalls';
+import {
+  getElonMuskDreams,
+  getFutureElonMuskDreams,
+  getElonMuskNews
+} from '../../apiCalls';
 import { addSpaceData, isLoading, handleError } from '../../actions';
 
 jest.mock('../../apiCalls.js');
@@ -128,8 +132,14 @@ describe('APP', () => {
   const mockSaveFavorties = jest.fn();
   const mockIsLoading = jest.fn();
   const mockHandleError = jest.fn();
+  const mockAddUpcomingSpaceData = jest.fn();
+  const mockAddSpaceNews = jest.fn();
 
   getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
+  getFutureElonMuskDreams.mockImplementation(() =>
+    Promise.resolve(mockLaunchData)
+  );
+  getElonMuskNews.mockImplementation(() => Promise.resolve(mockLaunchData));
 
   beforeEach(() => {
     wrapper = shallow(
@@ -140,6 +150,8 @@ describe('APP', () => {
         saveFavorites={mockSaveFavorties}
         isLoading={mockIsLoading}
         handleError={mockHandleError}
+        addUpcomingSpaceData={mockAddUpcomingSpaceData}
+        addSpaceNews={mockAddSpaceNews}
       />
     );
   });
