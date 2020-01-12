@@ -209,5 +209,25 @@ describe('APP', () => {
 
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
+
+    it('should call dispatch with IS_LOADING action when isLoading is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = handleError('Error, Alert, Alert!');
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.handleError('Error, Alert, Alert!');
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with HANDLE_ERROR action when handleError is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = isLoading(false);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.isLoading(false);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
   });
 });
