@@ -12,3 +12,8 @@ export const handleError = errorMessage => ({
   type: 'HANDLE_ERROR',
   errorMessage: errorMessage
 });
+
+export const isLoading = loadingStatus => ({
+  type: 'IS_LOADING',
+  isLoading: loadingStatus
+});
