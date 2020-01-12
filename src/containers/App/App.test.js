@@ -198,4 +198,16 @@ describe('APP', () => {
       expect(mappedProps).toEqual(expected);
     });
   });
+
+  describe('mapDispatchToProps', () => {
+    it('should call dispatch with ADD_SPACE_DATA action when addSpaceData is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addSpaceData([{ launch: 'Falcon XR' }]);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.addSpaceData([{ launch: 'Falcon XR' }]);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+  });
 });
