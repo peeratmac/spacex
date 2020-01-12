@@ -82,13 +82,13 @@ export class App extends Component {
   };
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   launches: state.spaceData,
   favorites: state.favorites,
   isLoading: state.isLoading
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
   saveFavorites: favorites => dispatch(saveFavorites(favorites)),
   handleError: errorMessage => dispatch(handleError(errorMessage)),

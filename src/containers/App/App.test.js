@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { App } from './App';
+import { App, mapStateToProps, mapDispatchToProps } from './App';
 import { getElonMuskDreams } from '../../apiCalls';
-import { addSpaceData } from '../../actions';
+import { addSpaceData, isLoading, handleError } from '../../actions';
 
 jest.mock('../../apiCalls.js');
 
@@ -126,6 +126,8 @@ describe('APP', () => {
 
   const mockAddSpaceData = jest.fn();
   const mockSaveFavorties = jest.fn();
+  const mockIsLoading = jest.fn();
+  const mockHandleError = jest.fn();
 
   getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
 
@@ -136,6 +138,8 @@ describe('APP', () => {
         favorites={mockLaunchData}
         addSpaceData={mockAddSpaceData}
         saveFavorites={mockSaveFavorties}
+        isLoading={mockIsLoading}
+        handleError={mockHandleError}
       />
     );
   });
@@ -150,5 +154,80 @@ describe('APP', () => {
 
   it('should invoke addSpaceData prop when getElonMuskDreams resolves', () => {
     expect(mockAddSpaceData).toHaveBeenCalledWith(mockLaunchData);
+  });
+
+  it('should invoke isLoading prop when getElonMuskDreams resolves', () => {
+    expect(mockIsLoading).toHaveBeenCalledWith(false);
+  });
+
+  it.skip('should invoke handleError prop if getElonMuskDreams rejects', async () => {
+    getElonMuskDreams.mockImplementation(() => Promise.reject(Error('error')));
+
+    wrapper = await shallow(
+      <App
+        launches={mockLaunchData}
+        favorites={mockLaunchData}
+        addSpaceData={mockAddSpaceData}
+        saveFavorites={mockSaveFavorties}
+        isLoading={mockIsLoading}
+        handleError={mockHandleError}
+      />
+    );
+
+    await wrapper.instance().forceUpdate();
+    expect(mockHandleError).toHaveBeenCalled();
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return only the necessary information from the redux store', () => {
+      const mockState = {
+        spaceData: mockLaunchData,
+        favorites: [],
+        isLoading: false,
+        helloItsMe: true
+      };
+
+      const expected = {
+        launches: mockLaunchData,
+        favorites: [],
+        isLoading: false
+      };
+
+      const mappedProps = mapStateToProps(mockState);
+
+      expect(mappedProps).toEqual(expected);
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    it('should call dispatch with ADD_SPACE_DATA action when addSpaceData is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addSpaceData([{ launch: 'Falcon XR' }]);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.addSpaceData([{ launch: 'Falcon XR' }]);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with IS_LOADING action when isLoading is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = handleError('Error, Alert, Alert!');
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.handleError('Error, Alert, Alert!');
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with HANDLE_ERROR action when handleError is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = isLoading(false);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.isLoading(false);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
   });
 });
