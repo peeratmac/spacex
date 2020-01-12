@@ -4,17 +4,23 @@ import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
-import { addSpaceData, saveFavorites, handleError } from '../../actions';
+import {
+  addSpaceData,
+  saveFavorites,
+  handleError,
+  isLoading
+} from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 
 export class App extends Component {
   async componentDidMount() {
-    const { addSpaceData, handleError } = this.props;
+    const { addSpaceData, handleError, isLoading } = this.props;
     try {
       const data = await getElonMuskDreams();
       addSpaceData(data);
+      isLoading(false);
     } catch (error) {
       handleError(error.message);
     }
@@ -78,13 +84,15 @@ export class App extends Component {
 
 const mapStateToProps = state => ({
   launches: state.spaceData,
-  favorites: state.favorites
+  favorites: state.favorites,
+  isLoading: state.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
   saveFavorites: favorites => dispatch(saveFavorites(favorites)),
-  handleError: errorMessage => dispatch(handleError(errorMessage))
+  handleError: errorMessage => dispatch(handleError(errorMessage)),
+  isLoading: loadingStatus => dispatch(isLoading(loadingStatus))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
