@@ -252,5 +252,9 @@ describe('API CALLS', () => {
         'https://api.spacexdata.com/v3/launches/'
       );
     });
+
+    it('should return an array of all the launches by SpaceX', () => {
+      expect(getElonMuskDreams()).resolves.toEqual(mockResponse);
+    });
   });
 });
