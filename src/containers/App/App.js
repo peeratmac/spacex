@@ -4,19 +4,25 @@ import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
-import { addSpaceData, saveFavorites, clearFavorites } from '../../actions';
+import {
+  addSpaceData,
+  saveFavorites,
+  handleError,
+  isLoading
+} from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 
 export class App extends Component {
   async componentDidMount() {
-    const { addSpaceData } = this.props;
+    const { addSpaceData, handleError, isLoading } = this.props;
     try {
       const data = await getElonMuskDreams();
       addSpaceData(data);
+      isLoading(false);
     } catch (error) {
-      console.log(error);
+      handleError(error.message);
     }
   }
 
@@ -24,8 +30,6 @@ export class App extends Component {
     const { saveFavorites, favorites } = this.props;
 
     const flights = favorites.map(favorite => favorite.flight_number);
-
-    console.log(flights);
 
     if (flights.includes(launch.flight_number)) {
       let filteredFlights = favorites.filter(
@@ -38,7 +42,6 @@ export class App extends Component {
   };
 
   render = () => {
-    console.log(this.props.favorites);
     return (
       <div>
         <Route path='/' render={() => <NavigationBar />} />
@@ -81,12 +84,15 @@ export class App extends Component {
 
 const mapStateToProps = state => ({
   launches: state.spaceData,
-  favorites: state.favorites
+  favorites: state.favorites,
+  isLoading: state.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
-  saveFavorites: favorites => dispatch(saveFavorites(favorites))
+  saveFavorites: favorites => dispatch(saveFavorites(favorites)),
+  handleError: errorMessage => dispatch(handleError(errorMessage)),
+  isLoading: loadingStatus => dispatch(isLoading(loadingStatus))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

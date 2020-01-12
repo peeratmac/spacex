@@ -8,7 +8,12 @@ export const saveFavorites = favorites => ({
   favorites: favorites
 });
 
-export const clearFavorites = () => ({
-  type: 'CLEAR_FAVORITES',
-  favorites: []
+export const handleError = errorMessage => ({
+  type: 'HANDLE_ERROR',
+  errorMessage: errorMessage
+});
+
+export const isLoading = loadingStatus => ({
+  type: 'IS_LOADING',
+  isLoading: loadingStatus
 });
