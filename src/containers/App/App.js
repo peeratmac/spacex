@@ -14,7 +14,8 @@ import {
   saveFavorites,
   handleError,
   isLoading,
-  addUpcomingSpaceData
+  addUpcomingSpaceData,
+  addSpaceNews
 } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,10 +30,12 @@ export class App extends Component {
       addUpcomingSpaceData
     } = this.props;
     try {
-      const data = await getElonMuskDreams();
-      const data2 = await getFutureElonMuskDreams();
-      addSpaceData(data);
-      addUpcomingSpaceData(data2);
+      const launchData = await getElonMuskDreams();
+      const futureLaunchData = await getFutureElonMuskDreams();
+
+      addSpaceData(launchData);
+      addUpcomingSpaceData(futureLaunchData);
+
       isLoading(false);
     } catch (error) {
       handleError(error.message);
@@ -112,7 +115,8 @@ export const mapStateToProps = state => ({
   launches: state.spaceData,
   favorites: state.favorites,
   isLoading: state.isLoading,
-  upcomingLaunches: state.upcomingSpaceData
+  upcomingLaunches: state.upcomingSpaceData,
+  spaceNews: state.spaceNews
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -121,7 +125,8 @@ export const mapDispatchToProps = dispatch => ({
   handleError: errorMessage => dispatch(handleError(errorMessage)),
   isLoading: loadingStatus => dispatch(isLoading(loadingStatus)),
   addUpcomingSpaceData: upcomingSpaceData =>
-    dispatch(addUpcomingSpaceData(upcomingSpaceData))
+    dispatch(addUpcomingSpaceData(upcomingSpaceData)),
+  addSpaceNews: spaceNews => dispatch(addSpaceNews(spaceNews))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
