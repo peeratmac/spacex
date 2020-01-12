@@ -17,3 +17,12 @@ export const getFutureElonMuskDreams = () => {
     }
   );
 };
+
+export const getElonMuskNews = () => {
+  return fetch('https://api.spacexdata.com/v3/history').then(response => {
+    if (!response.ok) {
+      throw Error('Error with GET request to retrieve Space X News/History');
+    }
+    return response.json();
+  });
+};
