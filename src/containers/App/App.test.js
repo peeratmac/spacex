@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { App } from './App';
+import { App, mapStateToProps, mapDispatchToProps } from './App';
 import { getElonMuskDreams } from '../../apiCalls';
-import { addSpaceData } from '../../actions';
+import { addSpaceData, isLoading, handleError } from '../../actions';
 
 jest.mock('../../apiCalls.js');
 
@@ -127,6 +127,7 @@ describe('APP', () => {
   const mockAddSpaceData = jest.fn();
   const mockSaveFavorties = jest.fn();
   const mockIsLoading = jest.fn();
+  const mockHandleError = jest.fn();
 
   getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
 
@@ -138,6 +139,7 @@ describe('APP', () => {
         addSpaceData={mockAddSpaceData}
         saveFavorites={mockSaveFavorties}
         isLoading={mockIsLoading}
+        handleError={mockHandleError}
       />
     );
   });
@@ -156,5 +158,27 @@ describe('APP', () => {
 
   it('should invoke isLoading prop when getElonMuskDreams resolves', () => {
     expect(mockIsLoading).toHaveBeenCalledWith(false);
+  });
+
+  it.skip('should invoke handleError prop if getElonMuskDreams rejects', async () => {
+    getElonMuskDreams.mockImplementation(() => Promise.reject(Error('error')));
+
+    wrapper = await shallow(
+      <App
+        launches={mockLaunchData}
+        favorites={mockLaunchData}
+        addSpaceData={mockAddSpaceData}
+        saveFavorites={mockSaveFavorties}
+        isLoading={mockIsLoading}
+        handleError={mockHandleError}
+      />
+    );
+
+    await wrapper.instance().forceUpdate();
+    expect(mockHandleError).toHaveBeenCalled();
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return only the necessary information from the redux store', () => {});
   });
 });
