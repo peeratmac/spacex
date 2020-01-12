@@ -168,7 +168,7 @@ describe('APP', () => {
     expect(mockAddSpaceData).toHaveBeenCalledWith(mockLaunchData);
   });
 
-  it('should invoke isLoading prop when getElonMuskDreams resolves', () => {
+  it('should invoke isLoading prop when getElonMusk related methods resolve', () => {
     expect(mockIsLoading).toHaveBeenCalledWith(false);
   });
 
@@ -196,13 +196,17 @@ describe('APP', () => {
         spaceData: mockLaunchData,
         favorites: [],
         isLoading: false,
+        upcomingSpaceData: [],
+        spaceNews: [],
         helloItsMe: true
       };
 
       const expected = {
         launches: mockLaunchData,
         favorites: [],
-        isLoading: false
+        isLoading: false,
+        upcomingLaunches: [],
+        spaceNews: []
       };
 
       const mappedProps = mapStateToProps(mockState);
