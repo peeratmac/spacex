@@ -179,6 +179,23 @@ describe('APP', () => {
   });
 
   describe('mapStateToProps', () => {
-    it('should return only the necessary information from the redux store', () => {});
+    it('should return only the necessary information from the redux store', () => {
+      const mockState = {
+        spaceData: mockLaunchData,
+        favorites: [],
+        isLoading: false,
+        helloItsMe: true
+      };
+
+      const expected = {
+        launches: mockLaunchData,
+        favorites: [],
+        isLoading: false
+      };
+
+      const mappedProps = mapStateToProps(mockState);
+
+      expect(mappedProps).toEqual(expected);
+    });
   });
 });
