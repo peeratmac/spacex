@@ -27,15 +27,16 @@ export class App extends Component {
       addSpaceData,
       handleError,
       isLoading,
-      addUpcomingSpaceData
+      addUpcomingSpaceData,
+      addSpaceNews
     } = this.props;
     try {
       const launchData = await getElonMuskDreams();
       const futureLaunchData = await getFutureElonMuskDreams();
-
+      const newsData = await getElonMuskNews();
       addSpaceData(launchData);
       addUpcomingSpaceData(futureLaunchData);
-
+      addSpaceNews(newsData);
       isLoading(false);
     } catch (error) {
       handleError(error.message);
