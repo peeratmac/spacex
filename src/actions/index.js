@@ -22,3 +22,8 @@ export const addUpcomingSpaceData = upcomingSpaceData => ({
   type: 'ADD_UPCOMING_SPACE_DATA',
   upcomingSpaceData: upcomingSpaceData
 });
+
+export const addSpaceNews = spaceNews => ({
+  type: 'ADD_SPACE_NEWS',
+  spaceNews: spaceNews
+});

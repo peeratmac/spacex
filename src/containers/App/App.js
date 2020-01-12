@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { getElonMuskDreams, getFutureElonMuskDreams } from '../../apiCalls';
+import {
+  getElonMuskDreams,
+  getFutureElonMuskDreams,
+  getElonMuskNews
+} from '../../apiCalls';
 import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
