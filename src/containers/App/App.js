@@ -4,6 +4,7 @@ import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
+import { UpcomingLaunches } from '../../containers/UpcomingLaunches/UpcomingLaunches';
 import {
   addSpaceData,
   saveFavorites,
@@ -55,6 +56,7 @@ export class App extends Component {
             />
           )}
         />
+
         <Route
           exact
           path='/launch/:flight_number'
@@ -67,6 +69,7 @@ export class App extends Component {
             return <LaunchPage launch={launchData} />;
           }}
         />
+
         <Route
           exact
           path='/favorites'
@@ -76,6 +79,12 @@ export class App extends Component {
               saveFavorite={this.saveFavorite}
             />
           )}
+        />
+
+        <Route
+          exact
+          path='/upcoming-launches'
+          render={() => <UpcomingLaunches />}
         />
       </div>
     );
