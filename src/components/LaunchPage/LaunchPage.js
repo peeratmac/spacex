@@ -1,7 +1,7 @@
 import React from 'react';
 import './LaunchPage.css';
 
-export const LaunchPage = launch => {
+export const LaunchPage = ({ launch }) => {
   return (
     <div>
       <img
