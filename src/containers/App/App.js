@@ -4,19 +4,19 @@ import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
-import { addSpaceData, saveFavorites } from '../../actions';
+import { addSpaceData, saveFavorites, handleError } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 
 export class App extends Component {
   async componentDidMount() {
-    const { addSpaceData } = this.props;
+    const { addSpaceData, handleError } = this.props;
     try {
       const data = await getElonMuskDreams();
       addSpaceData(data);
     } catch (error) {
-      console.log(error);
+      handleError(error.message);
     }
   }
 
@@ -83,7 +83,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
-  saveFavorites: favorites => dispatch(saveFavorites(favorites))
+  saveFavorites: favorites => dispatch(saveFavorites(favorites)),
+  handleError: errorMessage => dispatch(handleError(errorMessage))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
