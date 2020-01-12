@@ -1,3 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LAUNCH CARD should match the LaunchCard Snapshot UI 1`] = `ShallowWrapper {}`;
+exports[`LAUNCH CARD should match the LaunchCard Snapshot UI 1`] = `
+<div
+  className="launch-card-main"
+>
+  <NavLink
+    className="launch-card"
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+    to="/launch/1"
+  >
+    <p>
+      Flight Number: 
+      1
+    </p>
+    <p>
+      Mission: 
+      FalconSat
+    </p>
+    <p>
+      Launch: 
+      2006
+    </p>
+    <p
+      className="site-name"
+    >
+      Site: 
+      Kwajalein Atoll Omelek Island
+    </p>
+  </NavLink>
+  <button
+    className="save-button"
+    onClick={[Function]}
+  >
+    SAVE
+  </button>
+</div>
+`;

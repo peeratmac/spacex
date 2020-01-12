@@ -1,3 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LAUNCH PAGE should match the LaunchPage Snapshot UI 1`] = `ShallowWrapper {}`;
+exports[`LAUNCH PAGE should match the LaunchPage Snapshot UI 1`] = `
+<div>
+  <img
+    alt="Mission Patch"
+    className="patch-image"
+    src="https://images2.imgbox.com/40/e3/GypSkayF_o.png"
+  />
+  <div
+    className="launch-page"
+  >
+    <h1
+      className="launch-page-info"
+    >
+      Mission: 
+      FalconSat
+    </h1>
+    <p
+      className="launch-page-info"
+    >
+      Flight Number: 
+      1
+    </p>
+    <p
+      className="launch-page-info"
+    >
+      Launch: 
+      2006
+    </p>
+    <p
+      className="launch-page-info"
+    >
+      Site: 
+      Kwajalein Atoll Omelek Island
+    </p>
+    <p
+      className="launch-page-info"
+    >
+      Related Article:
+       
+      <a
+        href="https://www.space.com/2196-spacex-inaugural-falcon-1-rocket-lost-launch.html"
+      >
+        FalconSat
+      </a>
+    </p>
+    <p
+      className="launch-page-info"
+    >
+      More Information:
+         
+      <a
+        href="https://en.wikipedia.org/wiki/DemoSat"
+      >
+        FalconSat
+      </a>
+    </p>
+  </div>
+  <div
+    className="video"
+    style={
+      Object {
+        "height": 0,
+        "paddingBottom": "56.25%",
+        "paddingTop": 25,
+        "position": "relative",
+      }
+    }
+  >
+    <iframe
+      frameBorder="0"
+      src="https://www.youtube.com/embed/0a_00nJ_Y88"
+      style={
+        Object {
+          "height": "100%",
+          "left": 0,
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+</div>
+`;

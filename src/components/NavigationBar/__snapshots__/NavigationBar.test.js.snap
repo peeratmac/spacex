@@ -1,3 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NAVIGATION BAR should match the Navigation Bar Snapshot UI 1`] = `ShallowWrapper {}`;
+exports[`NAVIGATION BAR should match the Navigation Bar Snapshot UI 1`] = `
+<div
+  className="nav-header"
+>
+  <div
+    className="logo"
+  >
+    Space X
+  </div>
+  <div
+    className="main-nav"
+  >
+    <NavLink
+      className="nav-link-title"
+      exact={true}
+      to="/"
+    >
+      Home
+    </NavLink>
+    <NavLink
+      className="nav-link-title"
+      exact={true}
+      to="/favorites"
+    >
+      Favorites
+    </NavLink>
+    <NavLink
+      className="nav-link-title"
+      exact={true}
+      to="/upcoming-launches"
+    >
+      Upcoming Launches
+    </NavLink>
+    <NavLink
+      className="nav-link-title"
+      exact={true}
+      to="/spacex-history"
+    >
+      Space X History
+    </NavLink>
+    <NavLink
+      className="nav-link-title"
+      exact={true}
+      to="/launch-pads"
+    >
+      Launch Pads
+    </NavLink>
+  </div>
+</div>
+`;

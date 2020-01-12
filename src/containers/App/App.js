@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { getElonMuskDreams } from '../../apiCalls';
+import { getElonMuskDreams, getFutureElonMuskDreams } from '../../apiCalls';
 import { LaunchList } from '../../components/LaunchList/LaunchList';
 import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
+import { UpcomingLaunches } from '../../containers/UpcomingLaunches/UpcomingLaunches';
 import {
   addSpaceData,
   saveFavorites,
   handleError,
-  isLoading
+  isLoading,
+  addUpcomingSpaceData
 } from '../../actions';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -16,10 +18,17 @@ import './App.css';
 
 export class App extends Component {
   async componentDidMount() {
-    const { addSpaceData, handleError, isLoading } = this.props;
+    const {
+      addSpaceData,
+      handleError,
+      isLoading,
+      addUpcomingSpaceData
+    } = this.props;
     try {
       const data = await getElonMuskDreams();
+      const data2 = await getFutureElonMuskDreams();
       addSpaceData(data);
+      addUpcomingSpaceData(data2);
       isLoading(false);
     } catch (error) {
       handleError(error.message);
@@ -55,6 +64,7 @@ export class App extends Component {
             />
           )}
         />
+
         <Route
           exact
           path='/launch/:flight_number'
@@ -67,12 +77,24 @@ export class App extends Component {
             return <LaunchPage launch={launchData} />;
           }}
         />
+
         <Route
           exact
           path='/favorites'
           render={() => (
             <Favorites
               favoriteLaunches={this.props.favorites}
+              saveFavorite={this.saveFavorite}
+            />
+          )}
+        />
+
+        <Route
+          exact
+          path='/upcoming-launches'
+          render={() => (
+            <UpcomingLaunches
+              upcomingLaunches={this.props.upcomingLaunches}
               saveFavorite={this.saveFavorite}
             />
           )}
@@ -85,14 +107,17 @@ export class App extends Component {
 export const mapStateToProps = state => ({
   launches: state.spaceData,
   favorites: state.favorites,
-  isLoading: state.isLoading
+  isLoading: state.isLoading,
+  upcomingLaunches: state.upcomingSpaceData
 });
 
 export const mapDispatchToProps = dispatch => ({
   addSpaceData: spaceData => dispatch(addSpaceData(spaceData)),
   saveFavorites: favorites => dispatch(saveFavorites(favorites)),
   handleError: errorMessage => dispatch(handleError(errorMessage)),
-  isLoading: loadingStatus => dispatch(isLoading(loadingStatus))
+  isLoading: loadingStatus => dispatch(isLoading(loadingStatus)),
+  addUpcomingSpaceData: upcomingSpaceData =>
+    dispatch(addUpcomingSpaceData(upcomingSpaceData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
