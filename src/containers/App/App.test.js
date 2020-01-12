@@ -126,6 +126,7 @@ describe('APP', () => {
 
   const mockAddSpaceData = jest.fn();
   const mockSaveFavorties = jest.fn();
+  const mockIsLoading = jest.fn();
 
   getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
 
@@ -136,6 +137,7 @@ describe('APP', () => {
         favorites={mockLaunchData}
         addSpaceData={mockAddSpaceData}
         saveFavorites={mockSaveFavorties}
+        isLoading={mockIsLoading}
       />
     );
   });
@@ -150,5 +152,9 @@ describe('APP', () => {
 
   it('should invoke addSpaceData prop when getElonMuskDreams resolves', () => {
     expect(mockAddSpaceData).toHaveBeenCalledWith(mockLaunchData);
+  });
+
+  it('should invoke isLoading prop when getElonMuskDreams resolves', () => {
+    expect(mockIsLoading).toHaveBeenCalledWith(false);
   });
 });
