@@ -289,5 +289,14 @@ describe('APP', () => {
 
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
+
+    it('should call dispatch with saveFavorites action when saveFavorites is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = saveFavorites('SAVE_FAVORITES', mockLaunchData);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.saveFavorites('SAVE_FAVORITES', mockLaunchData);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
   });
 });
