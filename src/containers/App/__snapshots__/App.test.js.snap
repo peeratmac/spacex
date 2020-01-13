@@ -28,6 +28,11 @@ exports[`APP should match the App Snapshot UI 1`] = `
   />
   <Route
     exact={true}
+    path="/spacex-history"
+    render={[Function]}
+  />
+  <Route
+    exact={true}
     path="/launch-pads"
     render={[Function]}
   />
