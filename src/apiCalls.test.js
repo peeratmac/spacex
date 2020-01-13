@@ -425,4 +425,74 @@ describe('API CALLS', () => {
       );
     });
   });
+
+  describe('getElonMuskNews', () => {
+    let mockResponse = [
+      {
+        id: 1,
+        title: 'Falcon 1 Makes History',
+        event_date_utc: '2008-09-28T23:15:00Z',
+        event_date_unix: 1222643700,
+        flight_number: 4,
+        details:
+          'Falcon 1 becomes the first privately developed liquid fuel rocket to reach Earth orbit.',
+        links: {
+          reddit: null,
+          article:
+            'http://www.spacex.com/news/2013/02/11/flight-4-launch-update-0',
+          wikipedia: 'https://en.wikipedia.org/wiki/Falcon_1'
+        }
+      },
+      {
+        id: 2,
+        title: 'SpaceX Wins $1.6B CRS Contract',
+        event_date_utc: '2008-12-23T01:00:00Z',
+        event_date_unix: 1229994000,
+        flight_number: null,
+        details:
+          'NASA awards SpaceX $1.6B Commercial Resupply Services (CRS) contract.',
+        links: {
+          reddit: null,
+          article:
+            'https://www.nasaspaceflight.com/2008/12/spacex-and-orbital-win-huge-crs-contract-from-nasa/',
+          wikipedia:
+            'https://en.wikipedia.org/wiki/Commercial_Resupply_Services'
+        }
+      }
+    ];
+
+    beforeEach(() => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return Promise.resolve(mockResponse);
+          }
+        });
+      });
+    });
+
+    it('should be passed the correct URL', () => {
+      getElonMuskNews();
+
+      expect(window.fetch).toHaveBeenCalledWith(
+        'https://api.spacexdata.com/v3/history'
+      );
+    });
+
+    it('should return an array of all the news/history about SpaceX', () => {
+      expect(getElonMuskNews()).resolves.toEqual(mockResponse);
+    });
+
+    it('should return an error for a response that is not ok from fetching the history/news', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        });
+      });
+      expect(getElonMuskNews()).rejects.toEqual(
+        Error('Error with GET request to retrieve Space X News/History')
+      );
+    });
+  });
 });
