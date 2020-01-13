@@ -109,6 +109,16 @@ export class App extends Component {
           )}
         />
 
+        <Route
+          exact
+          path='/spacex-history'
+          render={() => (
+            <div>
+              <h1>Under Construction, please check back later! Thank you!</h1>
+            </div>
+          )}
+        />
+
         <Route exact path='/launch-pads' render={() => <LaunchPads />} />
       </div>
     );
