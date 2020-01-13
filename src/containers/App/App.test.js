@@ -1,8 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { App, mapStateToProps, mapDispatchToProps } from './App';
-import { getElonMuskDreams } from '../../apiCalls';
-import { addSpaceData, isLoading, handleError } from '../../actions';
+import {
+  getElonMuskDreams,
+  getFutureElonMuskDreams,
+  getElonMuskNews
+} from '../../apiCalls';
+import {
+  addSpaceData,
+  addUpcomingSpaceData,
+  addSpaceNews,
+  isLoading,
+  handleError
+} from '../../actions';
 
 jest.mock('../../apiCalls.js');
 
@@ -128,8 +138,14 @@ describe('APP', () => {
   const mockSaveFavorties = jest.fn();
   const mockIsLoading = jest.fn();
   const mockHandleError = jest.fn();
+  const mockAddUpcomingSpaceData = jest.fn();
+  const mockAddSpaceNews = jest.fn();
 
   getElonMuskDreams.mockImplementation(() => Promise.resolve(mockLaunchData));
+  getFutureElonMuskDreams.mockImplementation(() =>
+    Promise.resolve(mockLaunchData)
+  );
+  getElonMuskNews.mockImplementation(() => Promise.resolve(mockLaunchData));
 
   beforeEach(() => {
     wrapper = shallow(
@@ -140,6 +156,8 @@ describe('APP', () => {
         saveFavorites={mockSaveFavorties}
         isLoading={mockIsLoading}
         handleError={mockHandleError}
+        addUpcomingSpaceData={mockAddUpcomingSpaceData}
+        addSpaceNews={mockAddSpaceNews}
       />
     );
   });
@@ -156,7 +174,7 @@ describe('APP', () => {
     expect(mockAddSpaceData).toHaveBeenCalledWith(mockLaunchData);
   });
 
-  it('should invoke isLoading prop when getElonMuskDreams resolves', () => {
+  it('should invoke isLoading prop when getElonMusk related methods resolve', () => {
     expect(mockIsLoading).toHaveBeenCalledWith(false);
   });
 
@@ -184,13 +202,17 @@ describe('APP', () => {
         spaceData: mockLaunchData,
         favorites: [],
         isLoading: false,
+        upcomingSpaceData: [],
+        spaceNews: [],
         helloItsMe: true
       };
 
       const expected = {
         launches: mockLaunchData,
         favorites: [],
-        isLoading: false
+        isLoading: false,
+        upcomingLaunches: [],
+        spaceNews: []
       };
 
       const mappedProps = mapStateToProps(mockState);
@@ -206,6 +228,28 @@ describe('APP', () => {
       const mappedProps = mapDispatchToProps(mockDispatch);
 
       mappedProps.addSpaceData([{ launch: 'Falcon XR' }]);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with ADD_UPCOMING_SPACE_DATA action when addUpcomingSpaceData is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addUpcomingSpaceData([
+        { launch: 'Falcon 11 Pro' }
+      ]);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.addUpcomingSpaceData([{ launch: 'Falcon 11 Pro' }]);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with ADD_SPACE_NEWS action when addSpaceNews is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addSpaceNews([{ news: 'Falcon Heavier' }]);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.addSpaceNews([{ news: 'Falcon Heavier' }]);
 
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });

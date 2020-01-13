@@ -118,7 +118,6 @@ describe('LAUNCH PAGE', () => {
       crew: null
     };
 
-    console.log(mockLaunch.links.mission_patch);
     let wrapper = shallow(<LaunchPage launch={mockLaunch} />);
 
     expect(wrapper).toMatchSnapshot();

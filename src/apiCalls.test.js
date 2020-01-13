@@ -1,4 +1,8 @@
-import { getElonMuskDreams } from './apiCalls';
+import {
+  getElonMuskDreams,
+  getFutureElonMuskDreams,
+  getElonMuskNews
+} from './apiCalls';
 
 describe('API CALLS', () => {
   describe('getElonMuskDreams', () => {
@@ -264,7 +268,230 @@ describe('API CALLS', () => {
         });
       });
       expect(getElonMuskDreams()).rejects.toEqual(
-        Error('Error with GET request to retreive all Launches Data')
+        Error('Error with GET request to retrieve all Launches Data')
+      );
+    });
+  });
+
+  describe('getFutureElonMuskDreams', () => {
+    let mockResponse = [
+      {
+        flight_number: 88,
+        mission_name: 'Crew Dragon In Flight Abort Test',
+        mission_id: ['EE86F74'],
+        launch_year: '2020',
+        launch_date_unix: 1579352400,
+        launch_date_utc: '2020-01-18T13:00:00.000Z',
+        launch_date_local: '2020-01-18T08:00:00-05:00',
+        is_tentative: false,
+        tentative_max_precision: 'hour',
+        tbd: false,
+        launch_window: null,
+        rocket: {
+          rocket_id: 'falcon9',
+          rocket_name: 'Falcon 9',
+          rocket_type: 'FT',
+          first_stage: {
+            cores: [
+              {
+                core_serial: 'B1046',
+                flight: 4,
+                block: 5,
+                gridfins: null,
+                legs: null,
+                reused: true,
+                land_success: null,
+                landing_intent: null,
+                landing_type: null,
+                landing_vehicle: null
+              }
+            ]
+          },
+          second_stage: {
+            block: null,
+            payloads: [
+              {
+                payload_id: 'Crew Dragon In Flight Abort Test',
+                norad_id: [],
+                cap_serial: null,
+                reused: true,
+                customers: ['NASA (CCtCap)'],
+                nationality: 'United States',
+                manufacturer: 'SpaceX',
+                payload_type: 'Crew Dragon',
+                payload_mass_kg: null,
+                payload_mass_lbs: null,
+                orbit: 'SO',
+                orbit_params: {
+                  reference_system: 'geocentric',
+                  regime: 'sub-orbital',
+                  longitude: null,
+                  semi_major_axis_km: null,
+                  eccentricity: null,
+                  periapsis_km: null,
+                  apoapsis_km: null,
+                  inclination_deg: null,
+                  period_min: null,
+                  lifespan_years: null,
+                  epoch: null,
+                  mean_motion: null,
+                  raan: null,
+                  arg_of_pericenter: null,
+                  mean_anomaly: null
+                },
+                mass_returned_kg: null,
+                mass_returned_lbs: null,
+                flight_time_sec: null,
+                cargo_manifest: null,
+                uid: 'UerI6qmZTU2Fx2efDFm3QQ=='
+              }
+            ]
+          },
+          fairings: null
+        },
+        ships: [],
+        telemetry: {
+          flight_club: null
+        },
+        launch_site: {
+          site_id: 'ksc_lc_39a',
+          site_name: 'KSC LC 39A',
+          site_name_long: 'Kennedy Space Center Historic Launch Complex 39A'
+        },
+        launch_success: null,
+        links: {
+          mission_patch: null,
+          mission_patch_small: null,
+          reddit_campaign:
+            'https://www.reddit.com/r/spacex/comments/ek7eny/in_flight_abort_test_launch_campaign_thread',
+          reddit_launch: null,
+          reddit_recovery: null,
+          reddit_media: null,
+          presskit: null,
+          article_link: null,
+          wikipedia: null,
+          video_link: null,
+          youtube_id: null,
+          flickr_images: []
+        },
+        details:
+          "SpaceX will launch a Crew Dragon capsule from LC-39A, KSC on a fully fueled Falcon 9 rocket and then trigger the launch escape system during the period of maximum dynamic pressure. As part of NASA'a Commercial Crew Integrated Capability program (CCiCap) this test will contribute valuable data to help validate Crew Dragon and its launch abort system. The Crew Dragon will be recovered by GO Searcher after splashdown in the Atlantic Ocean. This flight does not go to orbit. The booster and upper stage are expected to break up following capsule separation and there will be no landing attempt.",
+        upcoming: true,
+        static_fire_date_utc: null,
+        static_fire_date_unix: null,
+        timeline: null,
+        crew: null,
+        last_date_update: '2019-11-27T01:51:12.000Z',
+        last_ll_launch_date: null,
+        last_ll_update: null,
+        last_wiki_launch_date: '2019-12-01T00:00:00.000Z',
+        last_wiki_revision: '638b6fa7-10b8-11ea-bc31-0e65898001b1',
+        last_wiki_update: '2019-11-27T01:51:12.000Z',
+        launch_date_source: 'wiki'
+      }
+    ];
+
+    beforeEach(() => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return Promise.resolve(mockResponse);
+          }
+        });
+      });
+    });
+
+    it('should be passed the correct URL', () => {
+      getFutureElonMuskDreams();
+
+      expect(window.fetch).toHaveBeenCalledWith(
+        'https://api.spacexdata.com/v3/launches/upcoming'
+      );
+    });
+
+    it('should return an array of all the future launches by SpaceX', () => {
+      expect(getFutureElonMuskDreams()).resolves.toEqual(mockResponse);
+    });
+
+    it('should return an error for a response that is not ok from fetching the future/upcoming launches', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        });
+      });
+      expect(getFutureElonMuskDreams()).rejects.toEqual(
+        Error('Error with GET request to retrieve future Launches Data')
+      );
+    });
+  });
+
+  describe('getElonMuskNews', () => {
+    let mockResponse = [
+      {
+        id: 1,
+        title: 'Falcon 1 Makes History',
+        event_date_utc: '2008-09-28T23:15:00Z',
+        event_date_unix: 1222643700,
+        flight_number: 4,
+        details:
+          'Falcon 1 becomes the first privately developed liquid fuel rocket to reach Earth orbit.',
+        links: {
+          reddit: null,
+          article:
+            'http://www.spacex.com/news/2013/02/11/flight-4-launch-update-0',
+          wikipedia: 'https://en.wikipedia.org/wiki/Falcon_1'
+        }
+      },
+      {
+        id: 2,
+        title: 'SpaceX Wins $1.6B CRS Contract',
+        event_date_utc: '2008-12-23T01:00:00Z',
+        event_date_unix: 1229994000,
+        flight_number: null,
+        details:
+          'NASA awards SpaceX $1.6B Commercial Resupply Services (CRS) contract.',
+        links: {
+          reddit: null,
+          article:
+            'https://www.nasaspaceflight.com/2008/12/spacex-and-orbital-win-huge-crs-contract-from-nasa/',
+          wikipedia:
+            'https://en.wikipedia.org/wiki/Commercial_Resupply_Services'
+        }
+      }
+    ];
+
+    beforeEach(() => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return Promise.resolve(mockResponse);
+          }
+        });
+      });
+    });
+
+    it('should be passed the correct URL', () => {
+      getElonMuskNews();
+
+      expect(window.fetch).toHaveBeenCalledWith(
+        'https://api.spacexdata.com/v3/history'
+      );
+    });
+
+    it('should return an array of all the news/history about SpaceX', () => {
+      expect(getElonMuskNews()).resolves.toEqual(mockResponse);
+    });
+
+    it('should return an error for a response that is not ok from fetching the history/news', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        });
+      });
+      expect(getElonMuskNews()).rejects.toEqual(
+        Error('Error with GET request to retrieve Space X News/History')
       );
     });
   });
