@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { UpcomingLaunches } from './UpcomingLaunches';
+import { UpcomingLaunches, mapStateToProps } from './UpcomingLaunches';
 
 describe('UPCOMING LAUNCHES', () => {
   const mockUpcomingLaunchesData = [
@@ -129,5 +129,20 @@ describe('UPCOMING LAUNCHES', () => {
     );
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('mapStateToProps', () => {
+    const mockState = {
+      upcomingSpaceData: mockUpcomingLaunchesData,
+      helloYepNopeFalcon: 'Falcon Heavy Baby'
+    };
+
+    const expected = {
+      upcomingLaunches: mockUpcomingLaunchesData
+    };
+
+    const mappedProps = mapStateToProps(mockState);
+
+    expect(mappedProps).toEqual(expected);
   });
 });

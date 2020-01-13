@@ -26,5 +26,10 @@ exports[`APP should match the App Snapshot UI 1`] = `
     path="/upcoming-launches"
     render={[Function]}
   />
+  <Route
+    exact={true}
+    path="/launch-pads"
+    render={[Function]}
+  />
 </div>
 `;

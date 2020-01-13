@@ -126,3 +126,11 @@ exports[`FAVORITES should match the Favorites Snapshot UI 1`] = `
   />
 </div>
 `;
+
+exports[`FAVORITES should match the Favorites Snapshot UI if there are no favorites 1`] = `
+<div>
+  <h1>
+    Please favorite some SpaceX launches and your favorites will be displayed here!
+  </h1>
+</div>
+`;
