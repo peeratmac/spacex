@@ -6,7 +6,13 @@ import {
   getFutureElonMuskDreams,
   getElonMuskNews
 } from '../../apiCalls';
-import { addSpaceData, isLoading, handleError } from '../../actions';
+import {
+  addSpaceData,
+  addUpcomingSpaceData,
+  addSpaceNews,
+  isLoading,
+  handleError
+} from '../../actions';
 
 jest.mock('../../apiCalls.js');
 
@@ -222,6 +228,28 @@ describe('APP', () => {
       const mappedProps = mapDispatchToProps(mockDispatch);
 
       mappedProps.addSpaceData([{ launch: 'Falcon XR' }]);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with ADD_UPCOMING_SPACE_DATA action when addUpcomingSpaceData is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addUpcomingSpaceData([
+        { launch: 'Falcon 11 Pro' }
+      ]);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.addUpcomingSpaceData([{ launch: 'Falcon 11 Pro' }]);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with ADD_SPACE_NEWS action when addSpaceNews is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addSpaceNews([{ news: 'Falcon Heavier' }]);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.addSpaceNews([{ news: 'Falcon Heavier' }]);
 
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
