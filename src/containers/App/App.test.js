@@ -11,7 +11,8 @@ import {
   addUpcomingSpaceData,
   addSpaceNews,
   isLoading,
-  handleError
+  handleError,
+  saveFavorites
 } from '../../actions';
 
 jest.mock('../../apiCalls.js');
@@ -170,8 +171,23 @@ describe('APP', () => {
     expect(getElonMuskDreams).toHaveBeenCalled();
   });
 
+  it('should invoke getFutureElonMuskDreams after mounting', () => {
+    expect(getFutureElonMuskDreams).toHaveBeenCalled();
+  });
+
+  it('should invoke getElonMuskNews after mounting', () => {
+    expect(getElonMuskNews).toHaveBeenCalled();
+  });
+
   it('should invoke addSpaceData prop when getElonMuskDreams resolves', () => {
     expect(mockAddSpaceData).toHaveBeenCalledWith(mockLaunchData);
+  });
+
+  it('should call saveFavorites (from Action Creator) when saveFavorite (App Method) is called', () => {
+    wrapper.instance().saveFavorite(mockLaunchData);
+
+    expect(mockSaveFavorties).toHaveBeenCalled();
+    expect(mockSaveFavorties).toHaveBeenCalledWith(mockLaunchData);
   });
 
   it('should invoke isLoading prop when getElonMusk related methods resolve', () => {
