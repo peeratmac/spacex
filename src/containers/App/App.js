@@ -9,6 +9,7 @@ import { Favorites } from '../../containers/Favorites/Favorites';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { LaunchPage } from '../../components/LaunchPage/LaunchPage';
 import { UpcomingLaunches } from '../../containers/UpcomingLaunches/UpcomingLaunches';
+import { LaunchPads } from '../../components/LaunchPads/LaunchPads';
 import {
   addSpaceData,
   saveFavorites,
@@ -107,6 +108,8 @@ export class App extends Component {
             />
           )}
         />
+
+        <Route exact path='/launch-pads' render={() => <LaunchPads />} />
       </div>
     );
   };
