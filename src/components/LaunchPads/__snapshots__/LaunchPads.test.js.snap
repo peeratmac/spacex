@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LAUNCH PADS should match the LaunchPads Snapshot UI 1`] = `
+<div>
+  <h1>
+    Under Construction, please check back later! Thank you!
+  </h1>
+</div>
+`;
